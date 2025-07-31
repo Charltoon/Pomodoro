@@ -171,18 +171,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
   const handleSpotifyLogin = () => {
     setIsLoading(true);
     
-    // For now, use demo mode to avoid OAuth issues
-    setTimeout(() => {
-      localStorage.setItem('spotify-access-token', 'demo-token');
-      setIsLoading(false);
-      onLogin();
-    }, 1500);
-    
-    // TODO: Enable real Spotify OAuth when HTTPS is properly configured
-    /*
     // Real Spotify OAuth configuration
     const clientId = '0b64c792742d40b694c34df0eac4aacc';
-    const redirectUri = encodeURIComponent('https://192.168.1.2:3000');
+    const redirectUri = encodeURIComponent('https://pomodoro-six-alpha.vercel.app');
     const scope = encodeURIComponent('user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-email user-read-private');
     
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}&show_dialog=true`;
@@ -192,7 +183,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
     
     // Redirect to Spotify authorization
     window.location.href = authUrl;
-    */
   };
 
   const handleDemoLogin = () => {

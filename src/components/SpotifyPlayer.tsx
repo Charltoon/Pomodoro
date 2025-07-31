@@ -140,7 +140,6 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = localStorage.getItem('spotify-access-token');
-  const isDemoMode = accessToken === 'demo-token';
 
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
@@ -153,19 +152,6 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
   // Fetch current playback state
   const fetchCurrentPlayback = async () => {
     if (!accessToken) return;
-
-    if (isDemoMode) {
-      // Demo mode - use mock data
-      setCurrentTrack({
-        name: 'Blinding Lights',
-        artists: [{ name: 'The Weeknd' }],
-        album: { images: [{ url: 'https://via.placeholder.com/60x60/FF4444/ffffff?text=♪' }] }
-      });
-      setCurrentTime(127);
-      setDuration(234);
-      setIsPlaying(false);
-      return;
-    }
 
     try {
       const response = await fetch('https://api.spotify.com/v1/me/player', {
@@ -198,32 +184,6 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
   // Control playback
   const controlPlayback = async (action: string) => {
     if (!accessToken) return;
-
-    if (isDemoMode) {
-      // Demo mode - simulate controls
-      setIsLoading(true);
-      setTimeout(() => {
-        if (action === 'play') {
-          setIsPlaying(true);
-        } else if (action === 'pause') {
-          setIsPlaying(false);
-        } else if (action === 'next') {
-          setCurrentTrack({
-            name: 'As It Was',
-            artists: [{ name: 'Harry Styles' }],
-            album: { images: [{ url: 'https://via.placeholder.com/60x60/FF4444/ffffff?text=♪' }] }
-          });
-        } else if (action === 'previous') {
-          setCurrentTrack({
-            name: 'Blinding Lights',
-            artists: [{ name: 'The Weeknd' }],
-            album: { images: [{ url: 'https://via.placeholder.com/60x60/FF4444/ffffff?text=♪' }] }
-          });
-        }
-        setIsLoading(false);
-      }, 500);
-      return;
-    }
 
     setIsLoading(true);
     try {
