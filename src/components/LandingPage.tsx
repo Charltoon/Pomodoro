@@ -173,7 +173,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
     
     // Real Spotify OAuth configuration
     const clientId = '0b64c792742d40b694c34df0eac4aacc';
-    const redirectUri = encodeURIComponent('https://pomodoro-six-alpha.vercel.app');
+    const redirectUri = encodeURIComponent('https://tomato-pomodoro.vercel.app');
     const scope = encodeURIComponent('user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-email user-read-private');
     
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}&show_dialog=true`;
@@ -219,11 +219,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
         },
-        body: new URLSearchParams({
-          grant_type: 'authorization_code',
-          code: code,
-          redirect_uri: 'https://pomodoro-six-alpha.vercel.app'
-        })
+                 body: new URLSearchParams({
+           grant_type: 'authorization_code',
+           code: code,
+           redirect_uri: 'https://tomato-pomodoro.vercel.app'
+         })
       });
 
       if (tokenResponse.ok) {
