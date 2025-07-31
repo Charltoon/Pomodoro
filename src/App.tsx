@@ -259,7 +259,6 @@ const App: React.FC = () => {
             setShowTasks(false);
           }}
         >
-          <Icon name="timer" size={16} />
           Timer
         </ControlButton>
         <ControlButton
@@ -270,7 +269,6 @@ const App: React.FC = () => {
             setShowStats(false);
           }}
         >
-          <Icon name="tasks" size={16} />
           Tasks
         </ControlButton>
         <ControlButton
@@ -352,7 +350,7 @@ const App: React.FC = () => {
             tasks={tasks}
             totalPomodorosCompleted={totalPomodorosCompleted}
           />
-    </div>
+        </div>
       )}
     </AppContainer>
   );
