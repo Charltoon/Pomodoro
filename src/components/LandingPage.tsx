@@ -176,7 +176,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
     const redirectUri = encodeURIComponent('https://pomodoro-six-alpha.vercel.app');
     const scope = encodeURIComponent('user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-email user-read-private');
     
-    const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}&show_dialog=true`;
+    const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}&show_dialog=true`;
     
     // Store the intended redirect
     localStorage.setItem('spotify-auth-redirect', 'true');
@@ -199,24 +199,56 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
     }
 
     // Check if returning from Spotify auth
-    const hash = window.location.hash;
-    if (hash && localStorage.getItem('spotify-auth-redirect')) {
-      const params = new URLSearchParams(hash.substring(1));
-      const accessToken = params.get('access_token');
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    
+    if (code && localStorage.getItem('spotify-auth-redirect')) {
+      // Exchange code for token
+      exchangeCodeForToken(code);
+    }
+  }, [onLogin]);
+
+  const exchangeCodeForToken = async (code: string) => {
+    try {
+      const clientId = '0b64c792742d40b694c34df0eac4aacc';
+      const clientSecret = 'ab447301bbde4714bc0e6357eebdcb79';
       
-      if (accessToken) {
-        // Store the token
-        localStorage.setItem('spotify-access-token', accessToken);
+      const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+        },
+        body: new URLSearchParams({
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: 'https://pomodoro-six-alpha.vercel.app'
+        })
+      });
+
+      if (tokenResponse.ok) {
+        const tokenData = await tokenResponse.json();
+        localStorage.setItem('spotify-access-token', tokenData.access_token);
         localStorage.removeItem('spotify-auth-redirect');
         
-        // Clear the URL hash
+        // Clear the URL parameters
         window.history.replaceState({}, document.title, window.location.pathname);
         
         // Login to the app
         onLogin();
+      } else {
+        console.error('Failed to exchange code for token');
+        // Fallback to demo mode for now
+        localStorage.setItem('spotify-access-token', 'demo-token');
+        onLogin();
       }
+    } catch (error) {
+      console.error('Error exchanging code for token:', error);
+      // Fallback to demo mode for now
+      localStorage.setItem('spotify-access-token', 'demo-token');
+      onLogin();
     }
-  }, [onLogin]);
+  };
 
   return (
     <LandingContainer>
