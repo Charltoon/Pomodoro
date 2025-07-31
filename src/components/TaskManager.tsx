@@ -9,61 +9,64 @@ interface TaskManagerProps {
   currentTaskId?: string;
   onTaskSelect: (taskId: string) => void;
   title?: string;
+  compact?: boolean;
 }
 
-const TaskManagerContainer = styled.div`
-  background: #000000;
-  border: 1px solid #333333;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 800px;
-  margin: 0 auto;
+const TaskManagerContainer = styled.div<{ compact?: boolean }>`
+  background: ${props => props.compact ? 'transparent' : '#000000'};
+  border: ${props => props.compact ? 'none' : '1px solid #333333'};
+  padding: ${props => props.compact ? '0' : '2rem'};
+  border-radius: ${props => props.compact ? '0' : '12px'};
+  max-width: ${props => props.compact ? 'none' : '800px'};
+  margin: ${props => props.compact ? '0' : '0 auto'};
+  display: flex;
+  flex-direction: column;
 `;
 
-const Header = styled.div`
+const Header = styled.div<{ compact?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #333333;
+  margin-bottom: ${props => props.compact ? '0.5rem' : '1rem'};
+  padding-bottom: ${props => props.compact ? '0.25rem' : '0.5rem'};
+  border-bottom: ${props => props.compact ? 'none' : '1px solid #333333'};
 `;
 
-const Title = styled.h2`
+const Title = styled.h2<{ compact?: boolean }>`
   margin: 0;
   color: #ffffff;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: ${props => props.compact ? '1rem' : '1.2rem'};
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 `;
 
 const TaskCount = styled.div`
   background: #333333;
   color: #ffffff;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
 `;
 
-const AddTaskButton = styled.button`
+const AddTaskButton = styled.button<{ compact?: boolean }>`
   background: #000000;
   color: #ffffff;
   border: 1px solid #333333;
-  padding: 0.5rem;
+  padding: ${props => props.compact ? '0.25rem' : '0.5rem'};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  font-size: 1.2rem;
+  width: ${props => props.compact ? '28px' : '36px'};
+  height: ${props => props.compact ? '28px' : '36px'};
+  font-size: ${props => props.compact ? '1rem' : '1.2rem'};
   font-weight: 400;
   transition: all 0.3s ease;
   border-radius: 6px;
@@ -75,39 +78,39 @@ const AddTaskButton = styled.button`
   }
 `;
 
-const AddTaskForm = styled.div`
+const AddTaskForm = styled.div<{ compact?: boolean }>`
   background: #111111;
   border: 1px solid #333333;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
+  padding: ${props => props.compact ? '0.5rem' : '1rem'};
+  margin-bottom: ${props => props.compact ? '0.5rem' : '2rem'};
+  border-radius: 6px;
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   align-items: center;
 `;
 
-const SectionTitle = styled.h3`
-  margin: 0 0 1rem 0;
+const SectionTitle = styled.h3<{ compact?: boolean }>`
+  margin: 0 0 ${props => props.compact ? '0.5rem' : '1rem'} 0;
   color: #ffffff;
-  font-size: 1.1rem;
+  font-size: ${props => props.compact ? '0.9rem' : '1.1rem'};
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
 `;
 
-const TaskSection = styled.div`
-  margin-bottom: 2rem;
+const TaskSection = styled.div<{ compact?: boolean }>`
+  margin-bottom: ${props => props.compact ? '0.5rem' : '2rem'};
 `;
 
-const FormInput = styled.input`
+const FormInput = styled.input<{ compact?: boolean }>`
   flex: 1;
-  padding: 0.75rem;
+  padding: ${props => props.compact ? '0.5rem' : '0.75rem'};
   border: 1px solid #333333;
   background: #111111;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: ${props => props.compact ? '0.85rem' : '1rem'};
   transition: all 0.3s ease;
-  border-radius: 6px;
+  border-radius: 4px;
 
   &:focus {
     outline: none;
@@ -153,61 +156,76 @@ const FormButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
   }
 `;
 
-const TaskList = styled.div`
+const TaskList = styled.div<{ compact?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: ${props => props.compact ? '0.125rem' : '0.5rem'};
 `;
 
-const TaskItem = styled.div<{ isSelected: boolean; isCompleted: boolean }>`
+const TaskItem = styled.div<{ isSelected: boolean; isCompleted: boolean; compact?: boolean }>`
   display: flex;
   align-items: center;
-  padding: 1rem;
-  background: ${props => props.isSelected ? '#111111' : '#1A1A1A'};
-  border: 1px solid ${props => props.isSelected ? '#ffffff' : '#333333'};
+  padding: ${props => props.compact ? '0.5rem' : '0.75rem'};
+  background: ${props => {
+    if (props.compact) {
+      return props.isSelected ? '#111111' : 'transparent';
+    }
+    return props.isSelected ? '#111111' : '#1A1A1A';
+  }};
+  border: ${props => {
+    if (props.compact) {
+      return props.isSelected ? '1px solid #ffffff' : 'none';
+    }
+    return `1px solid ${props.isSelected ? '#ffffff' : '#333333'}`;
+  }};
   cursor: pointer;
   transition: all 0.3s ease;
   opacity: ${props => props.isCompleted ? 0.5 : 1};
-  margin-bottom: 0.5rem;
-  border-radius: 8px;
+  margin-bottom: ${props => props.compact ? '0.0625rem' : '0.25rem'};
+  border-radius: ${props => props.compact ? '0' : '4px'};
 
   &:hover {
-    border-color: #ffffff;
-    background: ${props => props.isSelected ? '#111111' : '#222222'};
-    transform: translateY(-1px);
+    border-color: ${props => props.compact ? '#ffffff' : '#ffffff'};
+    background: ${props => {
+      if (props.compact) {
+        return props.isSelected ? '#111111' : '#111111';
+      }
+      return props.isSelected ? '#111111' : '#222222';
+    }};
+    transform: ${props => props.compact ? 'none' : 'translateY(-1px)'};
   }
 `;
 
-const TaskContent = styled.div`
+const TaskContent = styled.div<{ compact?: boolean }>`
   flex: 1;
-  margin-left: 1rem;
+  margin-left: ${props => props.compact ? '0.5rem' : '1rem'};
 `;
 
-const TaskTitle = styled.div<{ isCompleted: boolean }>`
+const TaskTitle = styled.div<{ isCompleted: boolean; compact?: boolean }>`
   font-weight: 400;
   color: #ffffff;
   text-decoration: ${props => props.isCompleted ? 'line-through' : 'none'};
-  margin-bottom: 0.25rem;
-  font-size: 0.95rem;
+  margin-bottom: ${props => props.compact ? '0.0625rem' : '0.25rem'};
+  font-size: ${props => props.compact ? '0.8rem' : '0.85rem'};
 `;
 
-const TaskMeta = styled.div`
-  font-size: 0.75rem;
+const TaskMeta = styled.div<{ compact?: boolean }>`
+  font-size: ${props => props.compact ? '0.65rem' : '0.75rem'};
   color: #888888;
   display: flex;
-  gap: 1rem;
+  gap: ${props => props.compact ? '0.5rem' : '1rem'};
   font-weight: 300;
 `;
 
-const TaskActions = styled.div`
+const TaskActions = styled.div<{ compact?: boolean }>`
   display: flex;
-  gap: 0.5rem;
+  gap: ${props => props.compact ? '0.25rem' : '0.5rem'};
 `;
 
-const ActionButton = styled.button<{ variant?: 'success' | 'danger' | 'warning' }>`
+const ActionButton = styled.button<{ variant?: 'success' | 'danger' | 'warning'; compact?: boolean }>`
   background: none;
   border: none;
-  padding: 0.5rem;
+  padding: ${props => props.compact ? '0.25rem' : '0.5rem'};
   cursor: pointer;
   color: ${props => {
     switch (props.variant) {
@@ -218,7 +236,7 @@ const ActionButton = styled.button<{ variant?: 'success' | 'danger' | 'warning' 
     }
   }};
   transition: all 0.3s ease;
-  font-size: 0.8rem;
+  font-size: ${props => props.compact ? '0.7rem' : '0.8rem'};
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -229,12 +247,12 @@ const ActionButton = styled.button<{ variant?: 'success' | 'danger' | 'warning' 
   }
 `;
 
-const EmptyState = styled.div`
+const EmptyState = styled.div<{ compact?: boolean }>`
   text-align: center;
-  padding: 1.5rem;
+  padding: ${props => props.compact ? '1rem' : '1.5rem'};
   color: #888888;
   font-style: italic;
-  font-size: 0.85rem;
+  font-size: ${props => props.compact ? '0.75rem' : '0.85rem'};
 `;
 
 const TaskManager: React.FC<TaskManagerProps> = ({
@@ -242,7 +260,8 @@ const TaskManager: React.FC<TaskManagerProps> = ({
   onTasksChange,
   currentTaskId,
   onTaskSelect,
-  title = "Quick Tasks"
+  title = "Quick Tasks",
+  compact = false
 }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -300,45 +319,49 @@ const TaskManager: React.FC<TaskManagerProps> = ({
     setEditTitle('');
   };
 
-  // Function to increment pomodoros for a task (can be used for manual tracking)
-  // const handleIncrementPomodoros = (taskId: string) => {
-  //   onTasksChange(tasks.map(task =>
-  //     task.id === taskId ? { ...task, completedPomodoros: task.completedPomodoros + 1 } : task
-  //   ));
-  // };
-
   return (
-    <TaskManagerContainer>
-      <Header>
-        <Title>
-          {title}
-          <TaskCount>{tasks.filter(t => !t.completed).length}</TaskCount>
-        </Title>
-        <AddTaskButton onClick={() => setShowAddForm(!showAddForm)}>
-          <Icon name="plus" size={16} />
-        </AddTaskButton>
-      </Header>
+    <TaskManagerContainer compact={compact}>
+      {title && (
+        <Header compact={compact}>
+          <Title compact={compact}>
+            {title}
+            <TaskCount>{tasks.filter(t => !t.completed).length}</TaskCount>
+          </Title>
+          <AddTaskButton compact={compact} onClick={() => setShowAddForm(!showAddForm)}>
+            <Icon name="plus" size={compact ? 12 : 16} />
+          </AddTaskButton>
+        </Header>
+      )}
+      
+      {!title && (
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.5rem' }}>
+          <AddTaskButton compact={compact} onClick={() => setShowAddForm(!showAddForm)}>
+            <Icon name="plus" size={compact ? 10 : 14} />
+          </AddTaskButton>
+        </div>
+      )}
 
       {showAddForm && (
-        <AddTaskForm>
+        <AddTaskForm compact={compact}>
           <FormInput
+            compact={compact}
             type="text"
             placeholder="Add a new task..."
             value={newTaskTitle}
             onChange={(e) => setNewTaskTitle(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleAddTask()}
           />
-          <AddTaskButton onClick={handleAddTask}>
-            <Icon name="plus" size={16} />
+          <AddTaskButton compact={compact} onClick={handleAddTask}>
+            <Icon name="plus" size={compact ? 12 : 16} />
           </AddTaskButton>
         </AddTaskForm>
       )}
 
-      <TaskSection>
-        <SectionTitle>Active Tasks</SectionTitle>
-        <TaskList>
+      <TaskSection compact={compact}>
+        {title && <SectionTitle compact={compact}>Active Tasks</SectionTitle>}
+        <TaskList compact={compact}>
           {tasks.filter(task => !task.completed).length === 0 ? (
-            <EmptyState>
+            <EmptyState compact={compact}>
               No active tasks. Add one to get started!
             </EmptyState>
           ) : (
@@ -347,21 +370,24 @@ const TaskManager: React.FC<TaskManagerProps> = ({
                 key={task.id}
                 isSelected={currentTaskId === task.id}
                 isCompleted={task.completed}
+                compact={compact}
                 onClick={() => onTaskSelect(task.id)}
               >
                 <ActionButton
                   variant="success"
+                  compact={compact}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleToggleTask(task.id);
                   }}
                 >
-                  <Icon name="check" size={16} />
+                  <Icon name="check" size={compact ? 12 : 16} />
                 </ActionButton>
 
-                <TaskContent>
+                <TaskContent compact={compact}>
                   {editingTaskId === task.id ? (
                     <FormInput
+                      compact={compact}
                       type="text"
                       value={editTitle}
                       onChange={(e) => setEditTitle(e.target.value)}
@@ -369,11 +395,11 @@ const TaskManager: React.FC<TaskManagerProps> = ({
                       onClick={(e) => e.stopPropagation()}
                     />
                   ) : (
-                    <TaskTitle isCompleted={task.completed}>
+                    <TaskTitle isCompleted={task.completed} compact={compact}>
                       {task.title}
                     </TaskTitle>
                   )}
-                  <TaskMeta>
+                  <TaskMeta compact={compact}>
                     <span>
                       {task.completedPomodoros} pomodoro{task.completedPomodoros !== 1 ? 's' : ''}
                       {task.estimatedPomodoros > 1 && ` / ${task.estimatedPomodoros} estimated`}
@@ -382,11 +408,12 @@ const TaskManager: React.FC<TaskManagerProps> = ({
                   </TaskMeta>
                 </TaskContent>
 
-                <TaskActions>
+                <TaskActions compact={compact}>
                   {editingTaskId === task.id ? (
                     <>
                       <ActionButton
                         variant="success"
+                        compact={compact}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleSaveEdit();
@@ -395,6 +422,7 @@ const TaskManager: React.FC<TaskManagerProps> = ({
                         Save
                       </ActionButton>
                       <ActionButton
+                        compact={compact}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleCancelEdit();
@@ -407,21 +435,23 @@ const TaskManager: React.FC<TaskManagerProps> = ({
                     <>
                       <ActionButton
                         variant="warning"
+                        compact={compact}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleStartEdit(task);
                         }}
                       >
-                        <Icon name="edit" size={16} />
+                        <Icon name="edit" size={compact ? 12 : 16} />
                       </ActionButton>
                       <ActionButton
                         variant="danger"
+                        compact={compact}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteTask(task.id);
                         }}
                       >
-                        <Icon name="delete" size={16} />
+                        <Icon name="delete" size={compact ? 12 : 16} />
                       </ActionButton>
                     </>
                   )}
@@ -432,60 +462,62 @@ const TaskManager: React.FC<TaskManagerProps> = ({
         </TaskList>
       </TaskSection>
 
-      <TaskSection>
-        <SectionTitle>Completed Tasks</SectionTitle>
-        <TaskList>
-          {tasks.filter(task => task.completed).length === 0 ? (
-            <EmptyState>
-              No completed tasks yet.
-            </EmptyState>
-          ) : (
-            tasks.filter(task => task.completed).map(task => (
-              <TaskItem
-                key={task.id}
-                isSelected={false}
-                isCompleted={task.completed}
-                onClick={() => {}}
-              >
-                <ActionButton
-                  variant="success"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleToggleTask(task.id);
-                  }}
+      {!compact && (
+        <TaskSection>
+          <SectionTitle>Completed Tasks</SectionTitle>
+          <TaskList>
+            {tasks.filter(task => task.completed).length === 0 ? (
+              <EmptyState>
+                No completed tasks yet.
+              </EmptyState>
+            ) : (
+              tasks.filter(task => task.completed).map(task => (
+                <TaskItem
+                  key={task.id}
+                  isSelected={false}
+                  isCompleted={task.completed}
+                  onClick={() => {}}
                 >
-                  <Icon name="check" size={16} />
-                </ActionButton>
-
-                <TaskContent>
-                  <TaskTitle isCompleted={task.completed}>
-                    {task.title}
-                  </TaskTitle>
-                  <TaskMeta>
-                    <span>
-                      {task.completedPomodoros} pomodoro{task.completedPomodoros !== 1 ? 's' : ''}
-                      {task.estimatedPomodoros > 1 && ` / ${task.estimatedPomodoros} estimated`}
-                    </span>
-                    <span>Created {task.createdAt.toLocaleDateString()}</span>
-                  </TaskMeta>
-                </TaskContent>
-
-                <TaskActions>
                   <ActionButton
-                    variant="danger"
+                    variant="success"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDeleteTask(task.id);
+                      handleToggleTask(task.id);
                     }}
                   >
-                    <Icon name="delete" size={16} />
+                    <Icon name="check" size={16} />
                   </ActionButton>
-                </TaskActions>
-              </TaskItem>
-            ))
-          )}
-        </TaskList>
-      </TaskSection>
+
+                  <TaskContent>
+                    <TaskTitle isCompleted={task.completed}>
+                      {task.title}
+                    </TaskTitle>
+                    <TaskMeta>
+                      <span>
+                        {task.completedPomodoros} pomodoro{task.completedPomodoros !== 1 ? 's' : ''}
+                        {task.estimatedPomodoros > 1 && ` / ${task.estimatedPomodoros} estimated`}
+                      </span>
+                      <span>Created {task.createdAt.toLocaleDateString()}</span>
+                    </TaskMeta>
+                  </TaskContent>
+
+                  <TaskActions>
+                    <ActionButton
+                      variant="danger"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteTask(task.id);
+                      }}
+                    >
+                      <Icon name="delete" size={16} />
+                    </ActionButton>
+                  </TaskActions>
+                </TaskItem>
+              ))
+            )}
+          </TaskList>
+        </TaskSection>
+      )}
     </TaskManagerContainer>
   );
 };

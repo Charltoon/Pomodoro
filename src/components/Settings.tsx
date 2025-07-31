@@ -18,6 +18,9 @@ const SettingsContainer = styled.div`
 `;
 
 const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #333333;
@@ -141,6 +144,27 @@ const SaveButton = styled.button`
   }
 `;
 
+const CloseButton = styled.button`
+  background: transparent;
+  border: 1px solid #666666;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+
+  &:hover {
+    background: #333333;
+    border-color: #888888;
+    transform: scale(1.05);
+  }
+`;
+
 const Settings: React.FC<SettingsProps> = ({ 
   settings, 
   onSettingsChange, 
@@ -174,6 +198,9 @@ const Settings: React.FC<SettingsProps> = ({
     <SettingsContainer>
       <Header>
         <Title>Timer Settings</Title>
+        <CloseButton onClick={handleClose}>
+          ×
+        </CloseButton>
       </Header>
 
       <Section>

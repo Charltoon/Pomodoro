@@ -4,6 +4,10 @@ import Timer from './components/Timer';
 import Settings from './components/Settings';
 import TaskManager from './components/TaskManager';
 import Statistics from './components/Statistics';
+import Calendar from './components/Calendar';
+import DailyHeatmap from './components/DailyHeatmap';
+import SpotifyPlayer from './components/SpotifyPlayer';
+import LandingPage from './components/LandingPage';
 import Icon from './components/Icon';
 import { TimerSettings, SessionType, Task, DailyStats } from './types';
 
@@ -16,7 +20,7 @@ const AppContainer = styled.div`
 
 const Header = styled.header`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -25,6 +29,7 @@ const Header = styled.header`
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.5rem;
+  padding-right: 1.5rem;
 `;
 
 const Title = styled.h1`
@@ -35,73 +40,131 @@ const Title = styled.h1`
   letter-spacing: 1px;
 `;
 
-const Subtitle = styled.p`
-  color: #888888;
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 400;
+const SettingsButton = styled.button`
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #333333;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: #111111;
+    border-color: #ffffff;
+    transform: translateY(-1px);
+  }
 `;
 
 const MainContent = styled.main`
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
   align-items: start;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 `;
 
+const LeftColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const MiddleColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const RightColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
 const TimerSection = styled.div`
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-`;
-
-const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const ControlsContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-`;
-
-const ControlButton = styled.button<{ active?: boolean }>`
-  background: ${props => props.active ? '#ffffff' : 'transparent'};
-  color: ${props => props.active ? '#000000' : '#ffffff'};
-  border: 1px solid ${props => props.active ? '#ffffff' : '#333333'};
-  padding: 0.6rem 1.2rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 500;
-  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-
-  &:hover {
-    background: ${props => props.active ? '#ffffff' : '#111111'};
-    border-color: #ffffff;
-    transform: translateY(-1px);
-  }
+  min-height: 500px;
 `;
 
+const QuickTasksSection = styled.div`
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+`;
 
+const CalendarSection = styled.div`
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeatmapSection = styled.div`
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StatisticsSection = styled.div`
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const LogoutSection = styled.div`
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const SectionTitle = styled.h3`
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  text-align: center;
+`;
 
 const defaultSettings: TimerSettings = {
   pomodoroDuration: 25,
@@ -115,6 +178,12 @@ const defaultSettings: TimerSettings = {
 };
 
 const App: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    // Check if user is already logged in on app start
+    const token = localStorage.getItem('spotify-access-token');
+    return !!token;
+  });
+  const [spotifyUser, setSpotifyUser] = useState<any>(null);
   const [settings, setSettings] = useState<TimerSettings>(() => {
     const saved = localStorage.getItem('pomodoro-settings');
     return saved ? JSON.parse(saved) : defaultSettings;
@@ -134,8 +203,6 @@ const App: React.FC = () => {
 
   const [currentTaskId, setCurrentTaskId] = useState<string>('');
   const [showSettings, setShowSettings] = useState(false);
-  const [showStats, setShowStats] = useState(false);
-  const [showTasks, setShowTasks] = useState(false);
   const [dailyStats, setDailyStats] = useState<DailyStats>({
     date: new Date().toISOString().split('T')[0],
     pomodorosCompleted: 0,
@@ -188,14 +255,14 @@ const App: React.FC = () => {
         ));
       }
 
-                   // Check if it's time for a long break
-             if (newCompletedPomodoros % settings.pomodorosBeforeLongBreak === 0) {
-               setCurrentSession('longBreak');
-               // Increment cycle after long break
-               setCurrentCycle(prev => prev + 1);
-             } else {
-               setCurrentSession('shortBreak');
-             }
+      // Check if it's time for a long break
+      if (newCompletedPomodoros % settings.pomodorosBeforeLongBreak === 0) {
+        setCurrentSession('longBreak');
+        // Increment cycle after long break
+        setCurrentCycle(prev => prev + 1);
+      } else {
+        setCurrentSession('shortBreak');
+      }
     } else {
       // Break completed, start next pomodoro
       setCurrentSession('pomodoro');
@@ -242,94 +309,190 @@ const App: React.FC = () => {
     setCurrentTaskId(taskId);
   };
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    fetchSpotifyUser();
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setSpotifyUser(null);
+    localStorage.removeItem('spotify-access-token');
+  };
+
+  const fetchSpotifyUser = async () => {
+    const accessToken = localStorage.getItem('spotify-access-token');
+    if (!accessToken || accessToken === 'demo-token') return;
+
+    try {
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setSpotifyUser(userData);
+      } else if (response.status === 401) {
+        console.error('Spotify token expired or invalid. Please re-login.');
+        // Clear invalid token
+        localStorage.removeItem('spotify-access-token');
+        setIsLoggedIn(false);
+        setSpotifyUser(null);
+      }
+    } catch (error) {
+      console.error('Error fetching Spotify user:', error);
+    }
+  };
+
+  // Fetch user data on app load if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchSpotifyUser();
+    }
+  }, [isLoggedIn]);
+
   const currentTask = tasks.find(task => task.id === currentTaskId);
+
+  if (!isLoggedIn) {
+    return <LandingPage onLogin={handleLogin} />;
+  }
 
   return (
     <AppContainer>
-                   <Header>
-               <Title>Pomodoro Timer</Title>
-             </Header>
+      <Header>
+        <Title>Pomodoro Timer</Title>
+        <SettingsButton onClick={() => setShowSettings(true)}>
+          <Icon name="settings" size={20} />
+        </SettingsButton>
+      </Header>
 
-      <ControlsContainer>
-        <ControlButton
-          active={!showSettings && !showStats && !showTasks}
-          onClick={() => {
-            setShowSettings(false);
-            setShowStats(false);
-            setShowTasks(false);
-          }}
-        >
-          Timer
-        </ControlButton>
-        <ControlButton
-          active={showTasks}
-          onClick={() => {
-            setShowTasks(!showTasks);
-            setShowSettings(false);
-            setShowStats(false);
-          }}
-        >
-          Tasks
-        </ControlButton>
-        <ControlButton
-          active={showStats}
-          onClick={() => {
-            setShowStats(!showStats);
-            setShowSettings(false);
-            setShowTasks(false);
-          }}
-        >
-          <Icon name="chart" size={16} />
-          Stats
-        </ControlButton>
-        <ControlButton
-          active={showSettings}
-          onClick={() => {
-            setShowSettings(!showSettings);
-            setShowStats(false);
-            setShowTasks(false);
-          }}
-        >
-          <Icon name="settings" size={16} />
-          Settings
-        </ControlButton>
-      </ControlsContainer>
-
-      {!showSettings && !showStats && !showTasks && (
+      {!showSettings && (
         <MainContent>
-                           <TimerSection>
-                   <Timer
-                     settings={settings}
-                     onSessionComplete={handleSessionComplete}
-                     currentSession={currentSession}
-                     completedPomodoros={completedPomodoros}
-                     currentTask={currentTask?.title}
-                     currentCycle={currentCycle}
-                   />
-          </TimerSection>
+          <LeftColumn>
+            <TimerSection>
+              <SectionTitle>Timer</SectionTitle>
+              <Timer
+                settings={settings}
+                onSessionComplete={handleSessionComplete}
+                currentSession={currentSession}
+                completedPomodoros={completedPomodoros}
+                currentTask={currentTask?.title}
+                currentCycle={currentCycle}
+              />
+            </TimerSection>
+          </LeftColumn>
 
-                           <Sidebar>
-                   <TaskManager
-                     tasks={tasks}
-                     onTasksChange={handleTasksChange}
-                     currentTaskId={currentTaskId}
-                     onTaskSelect={handleTaskSelect}
-                     title="Quick Tasks"
-                   />
-                 </Sidebar>
+          <MiddleColumn>
+            <QuickTasksSection>
+              <SectionTitle>Quick Tasks</SectionTitle>
+              <TaskManager
+                tasks={tasks}
+                onTasksChange={handleTasksChange}
+                currentTaskId={currentTaskId}
+                onTaskSelect={handleTaskSelect}
+                title=""
+                compact={true}
+              />
+            </QuickTasksSection>
+            
+                             <CalendarSection>
+                   <SectionTitle>Calendar</SectionTitle>
+                   <Calendar />
+                 </CalendarSection>
+
+                 <SpotifyPlayer />
+          </MiddleColumn>
+
+          <RightColumn>
+            <HeatmapSection>
+              <SectionTitle>Daily Heatmap</SectionTitle>
+              <DailyHeatmap dailyStats={dailyStats} />
+            </HeatmapSection>
+            
+            <StatisticsSection>
+              <SectionTitle>Statistics</SectionTitle>
+              <div style={{ color: '#ffffff', fontSize: '0.9rem' }}>
+                <div>Today's Pomodoros: {dailyStats.pomodorosCompleted}</div>
+                <div>Focus Time: {dailyStats.totalFocusTime} min</div>
+                <div>Tasks Completed: {dailyStats.tasksCompleted}</div>
+              </div>
+            </StatisticsSection>
+            
+                             <LogoutSection>
+                   <SectionTitle>User Profile</SectionTitle>
+                   <div style={{
+                     display: 'flex',
+                     alignItems: 'center',
+                     gap: '0.75rem',
+                     marginBottom: '1rem',
+                     flex: '1'
+                   }}>
+                     <div style={{
+                       width: '40px',
+                       height: '40px',
+                       background: spotifyUser?.images?.[0]?.url 
+                         ? 'transparent'
+                         : 'linear-gradient(45deg, #FF4444, #ff6666)',
+                       borderRadius: '50%',
+                       display: 'flex',
+                       alignItems: 'center',
+                       justifyContent: 'center',
+                       color: '#ffffff',
+                       fontSize: '1.2rem',
+                       fontWeight: 'bold',
+                       overflow: 'hidden'
+                     }}>
+                       {spotifyUser?.images?.[0]?.url ? (
+                         <img 
+                           src={spotifyUser.images[0].url} 
+                           alt="Profile"
+                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                         />
+                       ) : (
+                         spotifyUser?.display_name?.charAt(0) || 'U'
+                       )}
+                     </div>
+                     <div>
+                       <div style={{
+                         color: '#ffffff',
+                         fontSize: '0.9rem',
+                         fontWeight: '600'
+                       }}>
+                         {spotifyUser?.display_name || 'User'}
+                       </div>
+                       <div style={{
+                         color: '#888888',
+                         fontSize: '0.8rem'
+                       }}>
+                         {spotifyUser?.email || 'user@spotify.com'}
+                       </div>
+                     </div>
+                   </div>
+                   <button
+                     onClick={handleLogout}
+                     style={{
+                       background: '#FF4444',
+                       color: '#ffffff',
+                       border: 'none',
+                       padding: '0.75rem 1.5rem',
+                       borderRadius: '6px',
+                       cursor: 'pointer',
+                       fontSize: '0.9rem',
+                       fontWeight: '600',
+                       width: '100%',
+                       outline: 'none',
+                       boxSizing: 'border-box',
+                       display: 'block',
+                       marginTop: 'auto'
+                     }}
+                   >
+                     Sign Out
+                   </button>
+                 </LogoutSection>
+          </RightColumn>
         </MainContent>
-      )}
-
-      {showTasks && (
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <TaskManager
-            tasks={tasks}
-            onTasksChange={handleTasksChange}
-            currentTaskId={currentTaskId}
-            onTaskSelect={handleTaskSelect}
-            title="Task Manager"
-          />
-        </div>
       )}
 
       {showSettings && (
@@ -339,16 +502,6 @@ const App: React.FC = () => {
             onSettingsChange={handleSettingsChange}
             onClose={() => setShowSettings(false)}
             isOpen={showSettings}
-          />
-        </div>
-      )}
-
-      {showStats && (
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <Statistics
-            dailyStats={dailyStats}
-            tasks={tasks}
-            totalPomodorosCompleted={totalPomodorosCompleted}
           />
         </div>
       )}
