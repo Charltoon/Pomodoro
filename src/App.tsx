@@ -415,41 +415,9 @@ const HeatmapSection = styled.div`
 `;
 
 const StatisticsSection = styled.div`
-  background: #000000;
-  border: 1px solid #333333;
-  border-radius: 12px;
-  padding: 1.5rem;
-  height: 150px;
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 1024px) {
-    padding: 1.25rem;
-    height: 130px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    height: 120px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.75rem;
-    height: 100px;
-    border-radius: 8px;
-  }
-
-  @media (max-width: 360px) {
-    padding: 0.5rem;
-    height: 90px;
-    border-radius: 6px;
-  }
-
-  @media (max-width: 320px) {
-    padding: 0.25rem;
-    height: 80px;
-    border-radius: 4px;
-  }
+  flex: 1;
 `;
 
 const LogoutSection = styled.div`
@@ -716,12 +684,11 @@ const App: React.FC = () => {
             </HeatmapSection>
             
             <StatisticsSection>
-              <SectionTitle>Statistics</SectionTitle>
-              <div style={{ color: '#ffffff', fontSize: '0.9rem' }}>
-                <div>Today's Pomodoros: {dailyStats.pomodorosCompleted}</div>
-                <div>Focus Time: {dailyStats.totalFocusTime} min</div>
-                <div>Tasks Completed: {dailyStats.tasksCompleted}</div>
-              </div>
+              <Statistics 
+                dailyStats={dailyStats}
+                tasks={tasks}
+                totalPomodorosCompleted={totalPomodorosCompleted}
+              />
             </StatisticsSection>
             
                              <LogoutSection>
