@@ -658,7 +658,7 @@ const App: React.FC = () => {
 
           <MiddleColumn>
             <QuickTasksSection>
-              <SectionTitle>Quick Tasks</SectionTitle>
+              <SectionTitle>Task Manager</SectionTitle>
               <TaskManager
                 tasks={tasks}
                 onTasksChange={handleTasksChange}

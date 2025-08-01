@@ -260,7 +260,7 @@ const TaskManager: React.FC<TaskManagerProps> = ({
   onTasksChange,
   currentTaskId,
   onTaskSelect,
-  title = "Quick Tasks",
+  title = "Task Manager",
   compact = false
 }) => {
   const [showAddForm, setShowAddForm] = useState(false);
