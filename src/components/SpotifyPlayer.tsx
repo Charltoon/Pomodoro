@@ -151,10 +151,10 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
 
   const accessToken = localStorage.getItem('spotify-access-token');
 
-  // Mock data for when Spotify API is not available
-  const mockTrack = {
-    name: 'Eenie Meenie',
-    artists: [{ name: 'Sean Kingston' }],
+  // Default state when no track is playing
+  const defaultTrack = {
+    name: 'No track playing',
+    artists: [{ name: 'Unknown Artist' }],
     album: {
       images: [{ url: 'https://via.placeholder.com/60x60/FF4444/FFFFFF?text=♪' }]
     }
@@ -179,10 +179,12 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
   // Fetch current playback state
   const fetchCurrentPlayback = async () => {
     if (!accessToken) {
-      // Use mock data if no access token
-      setCurrentTrack(mockTrack);
-      setCleanCurrentTime(36); // Start at 0:36 to match the image
-      setCleanDuration(201); // 3:21 in seconds (3*60 + 21 = 201)
+      // No access token - show default state
+      setCurrentTrack(defaultTrack);
+      setCleanCurrentTime(0);
+      setCleanDuration(0);
+      setIsPlaying(false);
+      setError('No Spotify connection - connect to see your music');
       return;
     }
 
@@ -202,46 +204,42 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
           setCleanDuration(data.item.duration_ms / 1000);
           setError(null);
         } else {
-          // Use mock data if no active playback
-          setCurrentTrack(mockTrack);
-          setCleanCurrentTime(36);
-          setCleanDuration(201);
+          // No active playback - show default state
+          setCurrentTrack(defaultTrack);
+          setCleanCurrentTime(0);
+          setCleanDuration(0);
+          setIsPlaying(false);
           setError(null);
         }
       } else if (response.status === 401) {
-        console.error('Spotify token expired or invalid. Using mock data.');
-        setCurrentTrack(mockTrack);
-        setCleanCurrentTime(36);
-        setCleanDuration(201);
-        setError('Token expired - using demo mode');
+        console.error('Spotify token expired or invalid.');
+        setCurrentTrack(defaultTrack);
+        setCleanCurrentTime(0);
+        setCleanDuration(0);
+        setIsPlaying(false);
+        setError('Token expired - please reconnect to Spotify');
       } else {
         throw new Error(`HTTP ${response.status}`);
       }
     } catch (error) {
       console.error('Error fetching playback state:', error);
-      // Use mock data on error
-      setCurrentTrack(mockTrack);
-      setCleanCurrentTime(36);
-      setCleanDuration(201);
-      setError('Connection error - using demo mode');
+      // Show default state on error
+      setCurrentTrack(defaultTrack);
+      setCleanCurrentTime(0);
+      setCleanDuration(0);
+      setIsPlaying(false);
+      setError('Connection error - check your internet connection');
     }
   };
 
   // Control playback
   const controlPlayback = async (action: string) => {
+    // Clear any previous errors
+    setError(null);
+    
     if (!accessToken) {
-      // Mock functionality when no access token
-      if (action === 'play') {
-        setIsPlaying(true);
-      } else if (action === 'pause') {
-        setIsPlaying(false);
-      } else if (action === 'next') {
-        setCleanCurrentTime(0);
-        setCurrentTrack(mockTrack);
-      } else if (action === 'previous') {
-        setCleanCurrentTime(0);
-        setCurrentTrack(mockTrack);
-      }
+      // No access token - show error
+      setError('Connect to Spotify to control playback');
       return;
     }
 
@@ -257,6 +255,7 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
       if (response.ok) {
         // Refresh playback state
         setTimeout(fetchCurrentPlayback, 500);
+        setError(null);
       } else {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -288,11 +287,11 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
   React.useEffect(() => {
     if (isPlaying) {
       const interval = setInterval(() => {
-        setCleanCurrentTime(currentTime + 1);
-        // Reset to 0 if we reach the end
-        if (currentTime + 1 >= duration) {
-          setCleanCurrentTime(0);
-        }
+        setCurrentTime(prev => {
+          const newTime = prev + 1;
+          // Reset to 0 if we reach the end
+          return newTime >= duration ? 0 : newTime;
+        });
       }, 1000);
 
       return () => clearInterval(interval);
@@ -353,13 +352,13 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = () => {
       </ProgressContainer>
 
       <Controls>
-        <ControlButton onClick={skipPrevious} disabled={isLoading}>
+        <ControlButton onClick={skipPrevious} disabled={isLoading || !accessToken}>
           ⏮
         </ControlButton>
-        <ControlButton isPlay onClick={togglePlay} disabled={isLoading}>
+        <ControlButton isPlay onClick={togglePlay} disabled={isLoading || !accessToken}>
           {isLoading ? '⋯' : (isPlaying ? '⏸' : '▶')}
         </ControlButton>
-        <ControlButton onClick={skipNext} disabled={isLoading}>
+        <ControlButton onClick={skipNext} disabled={isLoading || !accessToken}>
           ⏭
         </ControlButton>
       </Controls>
