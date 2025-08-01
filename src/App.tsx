@@ -17,12 +17,24 @@ const AppContainer = styled.div`
   padding: 1.5rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 
+  @media (max-width: 1024px) {
+    padding: 1.25rem;
+  }
+
   @media (max-width: 768px) {
     padding: 1rem;
   }
 
   @media (max-width: 480px) {
+    padding: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
     padding: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
   }
 `;
 
@@ -39,6 +51,13 @@ const Header = styled.header`
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 
+  @media (max-width: 1024px) {
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.875rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
   @media (max-width: 768px) {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
@@ -51,8 +70,26 @@ const Header = styled.header`
 
   @media (max-width: 480px) {
     margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    gap: 0.25rem;
   }
 `;
 
@@ -63,12 +100,28 @@ const Title = styled.h1`
   margin: 0;
   letter-spacing: 1px;
 
+  @media (max-width: 1024px) {
+    font-size: 1.75rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 1.5rem;
+    letter-spacing: 0.5px;
   }
 
   @media (max-width: 480px) {
     font-size: 1.25rem;
+    letter-spacing: 0.25px;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 1.1rem;
+    letter-spacing: 0.25px;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1rem;
+    letter-spacing: 0.25px;
   }
 `;
 
@@ -107,6 +160,11 @@ const MainContent = styled.main`
     gap: 1.5rem;
   }
 
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -115,6 +173,14 @@ const MainContent = styled.main`
   @media (max-width: 480px) {
     gap: 0.75rem;
   }
+
+  @media (max-width: 360px) {
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    gap: 0.25rem;
+  }
 `;
 
 const LeftColumn = styled.div`
@@ -122,12 +188,24 @@ const LeftColumn = styled.div`
   flex-direction: column;
   gap: 2rem;
 
+  @media (max-width: 1024px) {
+    gap: 1.5rem;
+  }
+
   @media (max-width: 768px) {
     gap: 1rem;
   }
 
   @media (max-width: 480px) {
     gap: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    gap: 0.25rem;
   }
 `;
 
@@ -136,12 +214,24 @@ const MiddleColumn = styled.div`
   flex-direction: column;
   gap: 2rem;
 
+  @media (max-width: 1024px) {
+    gap: 1.5rem;
+  }
+
   @media (max-width: 768px) {
     gap: 1rem;
   }
 
   @media (max-width: 480px) {
     gap: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    gap: 0.25rem;
   }
 `;
 
@@ -150,12 +240,24 @@ const RightColumn = styled.div`
   flex-direction: column;
   gap: 2rem;
 
+  @media (max-width: 1024px) {
+    gap: 1.5rem;
+  }
+
   @media (max-width: 768px) {
     gap: 1rem;
   }
 
   @media (max-width: 480px) {
     gap: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    gap: 0.25rem;
   }
 `;
 
@@ -169,6 +271,11 @@ const TimerSection = styled.div`
   align-items: center;
   min-height: 500px;
 
+  @media (max-width: 1024px) {
+    padding: 1.75rem;
+    min-height: 450px;
+  }
+
   @media (max-width: 768px) {
     padding: 1.5rem;
     min-height: 400px;
@@ -178,6 +285,18 @@ const TimerSection = styled.div`
     padding: 1rem;
     min-height: 350px;
     border-radius: 8px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.75rem;
+    min-height: 300px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.5rem;
+    min-height: 250px;
+    border-radius: 4px;
   }
 `;
 
@@ -190,6 +309,11 @@ const QuickTasksSection = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 1024px) {
+    padding: 1.25rem;
+    min-height: 190px;
+  }
+
   @media (max-width: 768px) {
     padding: 1rem;
     min-height: 180px;
@@ -199,6 +323,18 @@ const QuickTasksSection = styled.div`
     padding: 0.75rem;
     min-height: 160px;
     border-radius: 8px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.5rem;
+    min-height: 140px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
+    min-height: 120px;
+    border-radius: 4px;
   }
 `;
 
@@ -211,6 +347,11 @@ const CalendarSection = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 1024px) {
+    padding: 1.25rem;
+    min-height: 190px;
+  }
+
   @media (max-width: 768px) {
     padding: 1rem;
     min-height: 180px;
@@ -220,6 +361,18 @@ const CalendarSection = styled.div`
     padding: 0.75rem;
     min-height: 160px;
     border-radius: 8px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.5rem;
+    min-height: 140px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
+    min-height: 120px;
+    border-radius: 4px;
   }
 `;
 
@@ -232,6 +385,11 @@ const HeatmapSection = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 1024px) {
+    padding: 1.25rem;
+    height: 280px;
+  }
+
   @media (max-width: 768px) {
     padding: 1rem;
     height: 250px;
@@ -241,6 +399,18 @@ const HeatmapSection = styled.div`
     padding: 0.75rem;
     height: 200px;
     border-radius: 8px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.5rem;
+    height: 180px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
+    height: 160px;
+    border-radius: 4px;
   }
 `;
 
@@ -253,6 +423,11 @@ const StatisticsSection = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 1024px) {
+    padding: 1.25rem;
+    height: 130px;
+  }
+
   @media (max-width: 768px) {
     padding: 1rem;
     height: 120px;
@@ -262,6 +437,18 @@ const StatisticsSection = styled.div`
     padding: 0.75rem;
     height: 100px;
     border-radius: 8px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.5rem;
+    height: 90px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
+    height: 80px;
+    border-radius: 4px;
   }
 `;
 

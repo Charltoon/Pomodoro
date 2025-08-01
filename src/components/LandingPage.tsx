@@ -7,11 +7,15 @@ interface LandingPageProps {
 
 const LandingContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+
+  @media (max-width: 1024px) {
+    padding: 1.5rem;
+  }
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -20,38 +24,72 @@ const LandingContainer = styled.div`
   }
 
   @media (max-width: 480px) {
+    padding: 0.75rem;
+    padding-top: 1.5rem;
+  }
+
+  @media (max-width: 360px) {
     padding: 0.5rem;
     padding-top: 1rem;
   }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
+    padding-top: 0.5rem;
+  }
 `;
 
-const LandingCard = styled.div`
-  background: #1A1A1A;
-  border: 1px solid #333333;
-  border-radius: 16px;
-  padding: 3rem;
-  max-width: 500px;
+const LandingContent = styled.div`
+  max-width: 1200px;
   width: 100%;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    gap: 3rem;
+  }
 
   @media (max-width: 768px) {
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 100%;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
   }
 
   @media (max-width: 480px) {
-    padding: 1.5rem;
-    border-radius: 8px;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 360px) {
+    gap: 1rem;
+  }
+`;
+
+const HeroSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    order: 2;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
   }
 `;
 
 const Logo = styled.div`
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: #FF4444;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: bold;
+
+  @media (max-width: 1024px) {
+    font-size: 3rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -60,195 +98,373 @@ const Logo = styled.div`
   @media (max-width: 480px) {
     font-size: 2rem;
   }
+
+  @media (max-width: 360px) {
+    font-size: 1.75rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Title = styled.h1`
   color: #ffffff;
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.1;
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 2rem;
-    letter-spacing: 1px;
   }
 
   @media (max-width: 480px) {
+    font-size: 1.75rem;
+  }
+
+  @media (max-width: 360px) {
     font-size: 1.5rem;
-    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.25rem;
   }
 `;
 
 const Subtitle = styled.p`
   color: #888888;
   font-size: 1.1rem;
-  margin-bottom: 2rem;
+  margin: 0;
   line-height: 1.6;
+  font-weight: 400;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.9rem;
-    margin-bottom: 1rem;
   }
-`;
 
-const SpotifyInfo = styled.div`
-  background: linear-gradient(45deg, #1DB954, #1ed760);
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 500;
+  @media (max-width: 360px) {
+    font-size: 0.85rem;
+  }
 
-  @media (max-width: 768px) {
-    padding: 0.75rem;
-    margin-bottom: 1.5rem;
+  @media (max-width: 320px) {
     font-size: 0.8rem;
   }
-
-  @media (max-width: 480px) {
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 0.75rem;
-  }
 `;
 
-const FeaturesList = styled.div`
-  display: flex;
-  flex-direction: column;
+const FeaturesGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-bottom: 2.5rem;
-  text-align: left;
+  margin-top: 1rem;
 
   @media (max-width: 768px) {
+    grid-template-columns: 1fr;
     gap: 0.75rem;
-    margin-bottom: 2rem;
   }
 
   @media (max-width: 480px) {
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
   }
 `;
 
-const FeatureItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #ffffff;
-  font-size: 1rem;
-
-  @media (max-width: 768px) {
-    gap: 0.5rem;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 0.5rem;
-    font-size: 0.8rem;
-  }
-`;
-
-const FeatureIcon = styled.div`
-  width: 24px;
-  height: 24px;
-  background: #FF4444;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-size: 0.8rem;
-  font-weight: bold;
-
-  @media (max-width: 768px) {
-    width: 20px;
-    height: 20px;
-    font-size: 0.7rem;
-  }
-
-  @media (max-width: 480px) {
-    width: 18px;
-    height: 18px;
-    font-size: 0.6rem;
-  }
-`;
-
-const LoginForm = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid #333333;
+const FeatureCard = styled.div`
   background: #000000;
-  color: #ffffff;
-  font-size: 1rem;
+  border: 1px solid #333333;
   border-radius: 8px;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
 
-  &:focus {
-    outline: none;
+  &:hover {
     border-color: #FF4444;
     background: #111111;
   }
 
-  &::placeholder {
-    color: #666666;
+  @media (max-width: 1024px) {
+    padding: 1rem;
   }
 
   @media (max-width: 768px) {
+    padding: 0.875rem;
+  }
+
+  @media (max-width: 480px) {
     padding: 0.75rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+`;
+
+const FeatureIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  background: #FF4444;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: 1024px) {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 480px) {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 360px) {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+`;
+
+const FeatureTitle = styled.h3`
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+
+  @media (max-width: 1024px) {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
     font-size: 0.9rem;
   }
 
   @media (max-width: 480px) {
-    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 360px) {
     font-size: 0.8rem;
   }
 `;
 
+const FeatureDescription = styled.p`
+  color: #888888;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.5;
+
+  @media (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.65rem;
+  }
+`;
+
+const AuthSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 12px;
+
+  @media (max-width: 768px) {
+    order: 1;
+    padding: 2rem;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 1rem;
+    border-radius: 4px;
+  }
+`;
+
+const SpotifyInfo = styled.div`
+  background: #000000;
+  border: 1px solid #1DB954;
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+
+  @media (max-width: 1024px) {
+    padding: 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.75rem;
+    font-size: 0.7rem;
+    border-radius: 4px;
+  }
+`;
+
+const SpotifyTitle = styled.h3`
+  color: #1DB954;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  @media (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.85rem;
+  }
+`;
+
+const SpotifyDescription = styled.p`
+  color: #888888;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+
+  @media (max-width: 1024px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.7rem;
+  }
+`;
+
+const LoginForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;
+
 const LoginButton = styled.button`
   width: 100%;
-  background: #FF4444;
-  color: #ffffff;
-  border: none;
+  background: #000000;
+  color: #1DB954;
+  border: 1px solid #1DB954;
   padding: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 
   &:hover {
-    background: #ff6666;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 68, 68, 0.3);
+    background: #1DB954;
+    color: #ffffff;
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0.875rem;
+    font-size: 0.95rem;
   }
 
   @media (max-width: 768px) {
     padding: 0.75rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 480px) {
+    padding: 0.625rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 360px) {
     padding: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
   }
 `;
 
@@ -257,12 +473,11 @@ const DemoButton = styled.button`
   background: transparent;
   color: #888888;
   border: 1px solid #333333;
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: 0.875rem;
+  font-size: 0.95rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
+  transition: all 0.2s ease;
 
   &:hover {
     border-color: #666666;
@@ -270,23 +485,51 @@ const DemoButton = styled.button`
     background: #222222;
   }
 
-  @media (max-width: 768px) {
-    padding: 0.5rem;
+  &:active {
+    transform: translateY(1px);
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0.75rem;
     font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.625rem;
+    font-size: 0.85rem;
   }
 
   @media (max-width: 480px) {
     padding: 0.5rem;
     font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.375rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
   }
 `;
 
 const Footer = styled.div`
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
   border-top: 1px solid #333333;
   color: #666666;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
@@ -343,11 +586,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
         },
-                 body: new URLSearchParams({
-           grant_type: 'authorization_code',
-           code: code,
-           redirect_uri: 'https://tomato-pomodoro.vercel.app'
-         })
+        body: new URLSearchParams({
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: 'https://tomato-pomodoro.vercel.app'
+        })
       });
 
       if (tokenResponse.ok) {
@@ -376,54 +619,80 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin }) => {
 
   return (
     <LandingContainer>
-      <LandingCard>
-        <Logo>🍅</Logo>
-        <Title>Pomodoro Timer</Title>
-                 <Subtitle>
-           Boost your productivity with focused work sessions and intelligent breaks
-         </Subtitle>
+      <LandingContent>
+        <HeroSection>
+          <div>
+            <Logo>🍅</Logo>
+            <Title>Pomodoro Timer</Title>
+            <Subtitle>
+              Boost your productivity with focused work sessions and intelligent breaks. 
+              Stay motivated and track your progress with our modern, intuitive interface.
+            </Subtitle>
+          </div>
+          
+          <FeaturesGrid>
+            <FeatureCard>
+              <FeatureIcon>⏱</FeatureIcon>
+              <FeatureTitle>Smart Timer</FeatureTitle>
+              <FeatureDescription>
+                Customizable Pomodoro sessions with intelligent break management
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>📊</FeatureIcon>
+              <FeatureTitle>Progress Tracking</FeatureTitle>
+              <FeatureDescription>
+                Visual insights into your daily productivity and focus patterns
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>🎵</FeatureIcon>
+              <FeatureTitle>Spotify Integration</FeatureTitle>
+              <FeatureDescription>
+                Control your music directly from the app for seamless focus
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard>
+              <FeatureIcon>📝</FeatureIcon>
+              <FeatureTitle>Task Management</FeatureTitle>
+              <FeatureDescription>
+                Organize and prioritize your work with our intuitive task system
+              </FeatureDescription>
+            </FeatureCard>
+          </FeaturesGrid>
+        </HeroSection>
 
-         <SpotifyInfo>
-           🎵 Connect your Spotify account to control music directly from the app
-         </SpotifyInfo>
+        <AuthSection>
+          <SpotifyInfo>
+            <SpotifyTitle>
+              <span style={{ color: '#1DB954' }}>♪</span> Spotify Integration
+            </SpotifyTitle>
+            <SpotifyDescription>
+              Connect your Spotify account to control music directly from the app and create the perfect focus environment.
+            </SpotifyDescription>
+          </SpotifyInfo>
+          
+          <LoginForm>
+            <LoginButton 
+              onClick={handleSpotifyLogin}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Connecting to Spotify...' : 'Continue with Spotify'}
+            </LoginButton>
+            
+            <DemoButton onClick={handleDemoLogin}>
+              Try Demo Mode
+            </DemoButton>
+          </LoginForm>
 
-         <FeaturesList>
-          <FeatureItem>
-            <FeatureIcon>⏱</FeatureIcon>
-            <span>Customizable timer sessions</span>
-          </FeatureItem>
-          <FeatureItem>
-            <FeatureIcon>📊</FeatureIcon>
-            <span>Track your daily progress</span>
-          </FeatureItem>
-          <FeatureItem>
-            <FeatureIcon>📝</FeatureIcon>
-            <span>Manage tasks efficiently</span>
-          </FeatureItem>
-          <FeatureItem>
-            <FeatureIcon>🎯</FeatureIcon>
-            <span>Stay focused and motivated</span>
-          </FeatureItem>
-        </FeaturesList>
-
-                 <LoginForm>
-           <LoginButton 
-             onClick={handleSpotifyLogin}
-             disabled={isLoading}
-             style={{ marginBottom: '1rem' }}
-           >
-             {isLoading ? 'Connecting to Spotify...' : '🎵 Login with Spotify'}
-           </LoginButton>
-           
-           <DemoButton onClick={handleDemoLogin}>
-             Try Demo Mode
-           </DemoButton>
-         </LoginForm>
-
-        <Footer>
-          <p>© 2024 Pomodoro Timer. Built for productivity.</p>
-        </Footer>
-      </LandingCard>
+          <Footer>
+            <p>©tonton-dev. Tomato Pomodoro.</p>
+          </Footer>
+        </AuthSection>
+      </LandingContent>
     </LandingContainer>
   );
 };

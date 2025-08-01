@@ -49,3 +49,73 @@ input:focus {
 * {
   transition: all 0.3s ease;
 }
+
+/* Responsive utilities */
+@media (max-width: 1024px) {
+  html {
+    font-size: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+/* Prevent horizontal scroll on very small screens */
+@media (max-width: 320px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (max-width: 768px) {
+  button, 
+  input, 
+  select, 
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Optimize for very small screens */
+@media (max-width: 360px) {
+  button, 
+  input, 
+  select, 
+  textarea {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  button, 
+  input, 
+  select, 
+  textarea {
+    min-height: 36px;
+    min-width: 36px;
+  }
+}

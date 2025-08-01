@@ -14,6 +14,11 @@ const PlayerContainer = styled.div`
   padding: 1rem;
   margin-top: 1rem;
 
+  @media (max-width: 1024px) {
+    padding: 0.875rem;
+    margin-top: 0.875rem;
+  }
+
   @media (max-width: 768px) {
     padding: 0.75rem;
     margin-top: 0.75rem;
@@ -23,6 +28,18 @@ const PlayerContainer = styled.div`
     padding: 0.5rem;
     margin-top: 0.5rem;
     border-radius: 6px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 0.375rem;
+    margin-top: 0.375rem;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0.25rem;
+    margin-top: 0.25rem;
+    border-radius: 3px;
   }
 `;
 
@@ -39,12 +56,24 @@ const PlayerTitle = styled.h4`
   font-size: 1rem;
   font-weight: 600;
 
+  @media (max-width: 1024px) {
+    font-size: 0.95rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.9rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.8rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.7rem;
   }
 `;
 
@@ -53,12 +82,24 @@ const SpotifyLogo = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
 
+  @media (max-width: 1024px) {
+    font-size: 1.1rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 1rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.9rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.75rem;
   }
 `;
 
@@ -80,6 +121,12 @@ const AlbumArt = styled.div`
   color: #ffffff;
   font-size: 1.5rem;
 
+  @media (max-width: 1024px) {
+    width: 55px;
+    height: 55px;
+    font-size: 1.35rem;
+  }
+
   @media (max-width: 768px) {
     width: 50px;
     height: 50px;
@@ -90,6 +137,18 @@ const AlbumArt = styled.div`
     width: 45px;
     height: 45px;
     font-size: 1rem;
+  }
+
+  @media (max-width: 360px) {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 320px) {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8rem;
   }
 `;
 
@@ -107,12 +166,24 @@ const TrackName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @media (max-width: 1024px) {
+    font-size: 0.85rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.8rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.75rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.65rem;
   }
 `;
 
@@ -123,12 +194,24 @@ const ArtistName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @media (max-width: 1024px) {
+    font-size: 0.75rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.7rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.65rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.6rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.55rem;
   }
 `;
 
@@ -158,12 +241,24 @@ const TimeInfo = styled.div`
   font-size: 0.7rem;
   color: #888888;
 
+  @media (max-width: 1024px) {
+    font-size: 0.675rem;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.65rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.6rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 0.55rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.5rem;
   }
 `;
 
@@ -173,12 +268,24 @@ const Controls = styled.div`
   align-items: center;
   gap: 1rem;
 
+  @media (max-width: 1024px) {
+    gap: 0.875rem;
+  }
+
   @media (max-width: 768px) {
     gap: 0.75rem;
   }
 
   @media (max-width: 480px) {
     gap: 0.5rem;
+  }
+
+  @media (max-width: 360px) {
+    gap: 0.375rem;
+  }
+
+  @media (max-width: 320px) {
+    gap: 0.25rem;
   }
 `;
 
@@ -202,6 +309,12 @@ const ControlButton = styled.button<{ isPlay?: boolean }>`
     transform: scale(1.05);
   }
 
+  @media (max-width: 1024px) {
+    width: ${props => props.isPlay ? '38px' : '30px'};
+    height: ${props => props.isPlay ? '38px' : '30px'};
+    font-size: ${props => props.isPlay ? '1.1rem' : '0.95rem'};
+  }
+
   @media (max-width: 768px) {
     width: ${props => props.isPlay ? '36px' : '28px'};
     height: ${props => props.isPlay ? '36px' : '28px'};
@@ -212,6 +325,18 @@ const ControlButton = styled.button<{ isPlay?: boolean }>`
     width: ${props => props.isPlay ? '32px' : '24px'};
     height: ${props => props.isPlay ? '32px' : '24px'};
     font-size: ${props => props.isPlay ? '0.9rem' : '0.8rem'};
+  }
+
+  @media (max-width: 360px) {
+    width: ${props => props.isPlay ? '28px' : '20px'};
+    height: ${props => props.isPlay ? '28px' : '20px'};
+    font-size: ${props => props.isPlay ? '0.8rem' : '0.7rem'};
+  }
+
+  @media (max-width: 320px) {
+    width: ${props => props.isPlay ? '24px' : '18px'};
+    height: ${props => props.isPlay ? '24px' : '18px'};
+    font-size: ${props => props.isPlay ? '0.7rem' : '0.6rem'};
   }
 `;
 
