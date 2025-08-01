@@ -13,6 +13,17 @@ const PlayerContainer = styled.div`
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+  }
 `;
 
 const PlayerHeader = styled.div`
@@ -27,12 +38,28 @@ const PlayerTitle = styled.h4`
   color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const SpotifyLogo = styled.div`
   color: #FF4444;
   font-size: 1.2rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const TrackInfo = styled.div`
@@ -52,6 +79,18 @@ const AlbumArt = styled.div`
   justify-content: center;
   color: #ffffff;
   font-size: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
 `;
 
 const TrackDetails = styled.div`
@@ -67,6 +106,14 @@ const TrackName = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const ArtistName = styled.div`
@@ -75,6 +122,14 @@ const ArtistName = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.65rem;
+  }
 `;
 
 const ProgressContainer = styled.div`
@@ -102,6 +157,14 @@ const TimeInfo = styled.div`
   justify-content: space-between;
   font-size: 0.7rem;
   color: #888888;
+
+  @media (max-width: 768px) {
+    font-size: 0.65rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const Controls = styled.div`
@@ -109,6 +172,14 @@ const Controls = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
 `;
 
 const ControlButton = styled.button<{ isPlay?: boolean }>`
@@ -129,6 +200,18 @@ const ControlButton = styled.button<{ isPlay?: boolean }>`
     background: ${props => props.isPlay ? '#ff6666' : '#333333'};
     border-color: ${props => props.isPlay ? '#ff6666' : '#888888'};
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    width: ${props => props.isPlay ? '36px' : '28px'};
+    height: ${props => props.isPlay ? '36px' : '28px'};
+    font-size: ${props => props.isPlay ? '1rem' : '0.9rem'};
+  }
+
+  @media (max-width: 480px) {
+    width: ${props => props.isPlay ? '32px' : '24px'};
+    height: ${props => props.isPlay ? '32px' : '24px'};
+    font-size: ${props => props.isPlay ? '0.9rem' : '0.8rem'};
   }
 `;
 

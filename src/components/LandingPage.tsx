@@ -12,6 +12,17 @@ const LandingContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    padding-top: 1rem;
+  }
 `;
 
 const LandingCard = styled.div`
@@ -23,6 +34,17 @@ const LandingCard = styled.div`
   width: 100%;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
 `;
 
 const Logo = styled.div`
@@ -30,6 +52,14 @@ const Logo = styled.div`
   color: #FF4444;
   margin-bottom: 1rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
+  }
 `;
 
 const Title = styled.h1`
@@ -39,6 +69,16 @@ const Title = styled.h1`
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -46,6 +86,16 @@ const Subtitle = styled.p`
   font-size: 1.1rem;
   margin-bottom: 2rem;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const SpotifyInfo = styled.div`
@@ -56,6 +106,18 @@ const SpotifyInfo = styled.div`
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+  }
 `;
 
 const FeaturesList = styled.div`
@@ -64,6 +126,16 @@ const FeaturesList = styled.div`
   gap: 1rem;
   margin-bottom: 2.5rem;
   text-align: left;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const FeatureItem = styled.div`
@@ -72,6 +144,16 @@ const FeatureItem = styled.div`
   gap: 0.75rem;
   color: #ffffff;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const FeatureIcon = styled.div`
@@ -85,6 +167,18 @@ const FeatureIcon = styled.div`
   color: #ffffff;
   font-size: 0.8rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+  }
 `;
 
 const LoginForm = styled.div`
@@ -111,6 +205,16 @@ const Input = styled.input`
   &::placeholder {
     color: #666666;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const LoginButton = styled.button`
@@ -136,6 +240,16 @@ const LoginButton = styled.button`
   &:active {
     transform: translateY(0);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const DemoButton = styled.button`
@@ -154,6 +268,16 @@ const DemoButton = styled.button`
     border-color: #666666;
     color: #ffffff;
     background: #222222;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    font-size: 0.8rem;
   }
 `;
 

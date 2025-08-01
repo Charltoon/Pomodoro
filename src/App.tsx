@@ -16,6 +16,14 @@ const AppContainer = styled.div`
   background: #000000;
   padding: 1.5rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 const Header = styled.header`
@@ -30,6 +38,22 @@ const Header = styled.header`
   margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 `;
 
 const Title = styled.h1`
@@ -38,6 +62,14 @@ const Title = styled.h1`
   font-weight: 600;
   margin: 0;
   letter-spacing: 1px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const SettingsButton = styled.button`
@@ -72,10 +104,16 @@ const MainContent = styled.main`
   @media (max-width: 1200px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
+    gap: 1.5rem;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
   }
 `;
 
@@ -83,18 +121,42 @@ const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const MiddleColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const RightColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const TimerSection = styled.div`
@@ -106,6 +168,17 @@ const TimerSection = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 500px;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    min-height: 400px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    min-height: 350px;
+    border-radius: 8px;
+  }
 `;
 
 const QuickTasksSection = styled.div`
@@ -116,6 +189,17 @@ const QuickTasksSection = styled.div`
   min-height: 200px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    min-height: 180px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    min-height: 160px;
+    border-radius: 8px;
+  }
 `;
 
 const CalendarSection = styled.div`
@@ -126,6 +210,17 @@ const CalendarSection = styled.div`
   min-height: 200px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    min-height: 180px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    min-height: 160px;
+    border-radius: 8px;
+  }
 `;
 
 const HeatmapSection = styled.div`
@@ -136,6 +231,17 @@ const HeatmapSection = styled.div`
   height: 300px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    height: 250px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    height: 200px;
+    border-radius: 8px;
+  }
 `;
 
 const StatisticsSection = styled.div`
@@ -146,6 +252,17 @@ const StatisticsSection = styled.div`
   height: 150px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    height: 120px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    height: 100px;
+    border-radius: 8px;
+  }
 `;
 
 const LogoutSection = styled.div`
